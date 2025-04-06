@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -64,7 +64,6 @@ export function CertificateViewer({ isOpen, onClose, certificate }: CertificateV
               alt={certificate.title}
               className="w-full rounded-lg"
               style={{
-                WebkitUserDrag: 'none',
                 WebkitTouchCallout: 'none',
               }}
               onDragStart={(e) => e.preventDefault()}

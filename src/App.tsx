@@ -1,18 +1,10 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  ChevronDown, 
   Sun,
   Moon,
-  Menu,
-  Bike,
-  Code2,
-  Heart
-} from 'lucide-react';
-import { SiGithub, SiLinkedin } from 'react-icons/si';
-import { MdEmail } from 'react-icons/md';
+  Menu} from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { WorkExperience } from '@/components/sections/WorkExperience';
