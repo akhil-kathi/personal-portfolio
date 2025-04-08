@@ -12,6 +12,7 @@ import { Education } from '@/components/sections/Education';
 import { Certifications } from '@/components/sections/Certifications';
 import { Interests } from './components/sections/Interests';
 import { Hero } from './components/sections/Hero';
+import { Preloader } from './components/sections/Preloader';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -47,49 +48,8 @@ function App() {
   return (
     <AnimatePresence>
       {loading ? (
-        <motion.div
-          key="loader"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-background flex flex-col items-center justify-center gap-8"
-        >
-          <motion.div
-            className="relative flex items-center justify-center"
-            animate={{
-              scale: [1, 1.1, 1],
-            }}
-            transition={{
-              duration: 2,
-              ease: "easeInOut",
-              repeat: Infinity,
-            }}
-          >
-            <motion.div
-              className="absolute inset-0 rounded-full bg-primary/20"
-              animate={{
-                scale: [1, 1.5, 1],
-                opacity: [0.5, 0, 0.5],
-              }}
-              transition={{
-                duration: 2,
-                ease: "easeInOut",
-                repeat: Infinity,
-              }}
-            />
-            <div className="text-4xl font-bold bg-primary text-primary-foreground px-8 py-6 rounded-lg relative z-10">
-              AK
-            </div>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="text-lg text-muted-foreground"
-          >
-            Loading...
-          </motion.div>
-        </motion.div>
+        <Preloader/>
+
       ) : (
         <motion.div
           initial={{ opacity: 0, y: 20 }}

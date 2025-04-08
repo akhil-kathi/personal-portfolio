@@ -57,6 +57,7 @@ export function Certifications() {
                   <img 
                     src={cert.imageUrl} 
                     alt={cert.title}
+                    loading="lazy"
                     className="absolute inset-0 w-full h-full object-contain"
                   />
                 </div>

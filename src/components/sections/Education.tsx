@@ -1,9 +1,9 @@
 import { GraduationCap, Calendar } from 'lucide-react';
 import { Card } from '@/components/ui/card';
-import jgsLogo from '@/assets/images/education/JGS.jpeg';
-import wesleyLogo from '@/assets/images/education/Wesley.jpeg';
-import officersAcademyLogo from '@/assets/images/education/OfficersAcademy.jpg';
-import kmitLogo from '@/assets/images/education/kmit.png';
+import jgsLogo from '@/assets/images/education/JGS.webp';
+import wesleyLogo from '@/assets/images/education/Wesley.webp';
+import officersAcademyLogo from '@/assets/images/education/OfficersAcademy.webp';
+import kmitLogo from '@/assets/images/education/kmit.webp';
 // Education Data
 const education = [
   {

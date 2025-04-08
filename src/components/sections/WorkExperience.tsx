@@ -29,6 +29,7 @@ import {
 import rogersLogo from '@/assets/images/companies/Rogers.webp';
 import centricaLogo from '@/assets/images/companies/Centrica.webp';
 import racLogo from '@/assets/images/companies/RAC.webp';
+import capitalOne from '@/assets/images/companies/CapitalOne.webp';
 
 // Work Experience Data
 const workExperience = [
@@ -50,13 +51,13 @@ const workExperience = [
     clients: [
       {
         name: "Capital One",
-        logo: <SiVolkswagen className="w-6 h-6 text-blue-600" />,
-        work: "Built highly reliable, fault tolerant solution that enables customers to connect with bank agents for query resolution through native app.",
+        logo: <img src={capitalOne} alt="CapitalOne" loading="lazy" className="w-6 h-6 object-cover rounded-full" />,
+        work: "Built highly reliable, fault tolerant solution for customers to connect with bank agents for query resolution within bank app.",
         url: "https://www.capitalone.com"
       },
       {
         name: "Centrica",
-        logo: <img src={centricaLogo} alt="Centrica" className="w-6 h-6 object-cover rounded-full" />,
+        logo: <img src={centricaLogo} alt="Centrica" loading="lazy" className="w-6 h-6 object-cover rounded-full" />,
         work: "Developed solution for customer appointment booking, rescheduling and agent interaction.",
         url: "https://www.britishgas.co.uk"
       },
@@ -68,26 +69,20 @@ const workExperience = [
       },
       {
         name: "Rogers",
-        logo: <img src={rogersLogo} alt="Rogers" className="w-6 h-6 object-cover rounded-full" />,
+        logo: <img src={rogersLogo} alt="Rogers" loading="lazy" className="w-6 h-6 object-cover rounded-full" />,
         work: "Built an backend solution for customer to redeem their offers and ad-ons.",
         url: "https://www.rogers.com"
       },
       {
         name: "RAC",
-        logo: <img src={racLogo} alt="RAC" className="w-6 h-6 object-cover rounded-full" />,
+        logo: <img src={racLogo} alt="RAC" loading="lazy" className="w-6 h-6 object-cover rounded-full" />,
         work: "Built survey system for customers to rate their experience.",
         url: "https://www.rac.co.uk"
       },
       {
         name: "SKAT",
         logo: <SiVolkswagen className="w-6 h-6 text-blue-500" />,
-        work: "Built an intensive reporting system for the customer to track responses.",
-        url: "https://www.newday.co.uk"
-      },
-      {
-        name: "New Day",
-        logo: <SiVolkswagen className="w-6 h-6 text-blue-500" />,
-        work: "Built fault tolerance system for delivering transactional OTPs to customers.",
+        work: "Built a survey solution with intensive reporting.",
         url: "https://www.newday.co.uk"
       }
     ]

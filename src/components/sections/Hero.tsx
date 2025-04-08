@@ -26,7 +26,7 @@ export function Hero({ scrollToSection }: HeroProps) {
           transition={{ delay: 0.3 }}
           className="text-lg sm:text-xl text-muted-foreground mb-8"
         >
-          Full Stack Developer & UI/UX Enthusiast
+          Software Engineer, Full Stack Developer & Machine Learning Enthusiast
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 20 }}

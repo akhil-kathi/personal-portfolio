@@ -57,6 +57,28 @@ export default {
         },
       },
       keyframes: {
+        // Define animation for 'A'
+        'flyInA': {
+          'from': {
+            opacity: '0',
+            transform: 'translate(-150%, -150%) rotate(-45deg) scale(0.5)',
+          },
+          'to': {
+            opacity: '1',
+            transform: 'translate(0, 0) rotate(0deg) scale(1)',
+          },
+        },
+        // Define animation for 'K'
+        'flyInK': {
+          'from': {
+            opacity: '0',
+            transform: 'translate(150%, 150%) rotate(35deg) scale(0.5)',
+          },
+          'to': {
+            opacity: '1',
+            transform: 'translate(0, 0) rotate(0deg) scale(1)',
+          },
+        },
         'accordion-down': {
           from: {
             height: '0',
@@ -75,6 +97,8 @@ export default {
         },
       },
       animation: {
+        'fly-in-a': 'flyInA 1s forwards ease-out',
+        'fly-in-k': 'flyInK 1s forwards ease-out 0.2s', // Added 0.2s delay for K
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
