@@ -60,5 +60,7 @@ export default defineConfig({
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'framer-motion']
-  }
+  },
+  // Copy SEO files to dist directory
+  publicDir: 'public',
 });
