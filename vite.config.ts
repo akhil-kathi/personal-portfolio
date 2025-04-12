@@ -44,10 +44,7 @@ export default defineConfig({
         reduce_vars: true,
       },
       mangle: {
-        toplevel: true,
-        properties: {
-          regex: /^_/,
-        },
+        toplevel: true, // don't rename top-level functions/classes
       },
       format: {
         comments: false,
