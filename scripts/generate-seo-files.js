@@ -1,5 +1,9 @@
-const fs = require('fs');
-const path = require('path');
+import { writeFileSync, mkdirSync } from 'fs';
+import { join } from 'path';
+import { fileURLToPath } from 'url';
+
+// Get the current directory path
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 // Function to detect the base URL
 function detectBaseUrl() {
@@ -78,13 +82,15 @@ const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 </urlset>`;
 
 // Ensure the public directory exists
-const publicDir = path.join(process.cwd(), 'public');
-if (!fs.existsSync(publicDir)) {
-  fs.mkdirSync(publicDir, { recursive: true });
+const publicDir = join(process.cwd(), 'public');
+try {
+  mkdirSync(publicDir, { recursive: true });
+} catch (err) {
+  if (err.code !== 'EEXIST') throw err;
 }
 
 // Write the files
-fs.writeFileSync(path.join(publicDir, 'robots.txt'), robotsTxt);
-fs.writeFileSync(path.join(publicDir, 'sitemap.xml'), sitemapXml);
+writeFileSync(join(publicDir, 'robots.txt'), robotsTxt);
+writeFileSync(join(publicDir, 'sitemap.xml'), sitemapXml);
 
 console.log(`SEO files generated successfully for ${BASE_URL}!`); 

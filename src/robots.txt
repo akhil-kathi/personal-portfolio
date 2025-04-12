@@ -1,4 +1,0 @@
-User-agent: *
-Disallow:
-
-Sitemap: https://akhilkathi.me/sitemap.xml
