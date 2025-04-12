@@ -1,0 +1,10 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://akhilkathi.com/sitemap.xml
+
+# Disallow admin and private routes
+Disallow: /admin/
+Disallow: /private/

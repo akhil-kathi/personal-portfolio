@@ -15,8 +15,9 @@ export function Preloader() {
         id="ak-loader-svg"
         xmlns="http://www.w3.org/2000/svg"
         width="150"
-        height="147"
+        height="100%"
         viewBox="0 0 1024 1007"
+        preserveAspectRatio="xMidYMid slice"
         className="overflow-visible"
       >
         {/* Group for "A" animation */}

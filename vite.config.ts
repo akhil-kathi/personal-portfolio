@@ -4,10 +4,21 @@ import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react({
+      jsxRuntime: 'automatic',
+      babel: {
+        plugins: [
+          ['@babel/plugin-transform-react-jsx', { runtime: 'automatic' }]
+        ]
+      }
+    })
+  ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+      'react': path.resolve(__dirname, './node_modules/react'),
+      'react-dom': path.resolve(__dirname, './node_modules/react-dom')
     },
   },
   build: {
