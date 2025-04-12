@@ -3,6 +3,7 @@ import { MdEmail } from 'react-icons/md';
 import { HiChevronDown } from 'react-icons/hi';
 import { Button } from '@/components/ui/button';
 import { SiGithub, SiLinkedin } from 'react-icons/si';
+import { FaMedium } from "react-icons/fa6";
 
 interface HeroProps {
   scrollToSection: (id: string) => void;
@@ -36,14 +37,20 @@ export function Hero({ scrollToSection }: HeroProps) {
         >
           <Button variant="outline" size="lg" asChild>
             <a href="https://github.com/akhil-kathi" target="_blank" rel="noopener noreferrer" className="flex items-center">
-            <SiGithub className="mr-2 h-5 w-5 text-[#181717] dark:text-white" />
+              <SiGithub className="mr-2 h-5 w-5 text-[#181717] dark:text-white" />
               <span className="hidden sm:inline">GitHub</span>
             </a>
           </Button>
           <Button variant="outline" size="lg" asChild>
             <a href="https://linkedin.com/in/akhilkathi" target="_blank" rel="noopener noreferrer" className="flex items-center">
-            <SiLinkedin className="mr-2 h-5 w-5 text-[#0A66C2]" />
+              <SiLinkedin className="mr-2 h-5 w-5 text-[#0A66C2]" />
               <span className="hidden sm:inline">LinkedIn</span>
+            </a>
+          </Button>
+          <Button variant="outline" size="lg" asChild>
+            <a href="https://medium.com/@akhilkathi" target="_blank" rel="noopener noreferrer" className="flex items-center">
+              <FaMedium className="mr-2 h-5 w-5 text-[#000000] dark:text-white" />
+              <span className="hidden sm:inline">Blog</span>
             </a>
           </Button>
           <Button variant="outline" size="lg" asChild>

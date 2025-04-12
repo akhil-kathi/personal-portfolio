@@ -24,6 +24,7 @@ import {
   SiAmazon,
   SiElastic
 } from 'react-icons/si';
+import { FaJava } from "react-icons/fa";
 
 // Import company logos
 import rogersLogo from '@/assets/images/companies/Rogers.webp';
@@ -46,7 +47,7 @@ const workExperience = [
       { name: "AWS", icon: <SiAmazon className="w-full h-full text-orange-500" /> },
       { name: "Spring Boot", icon: <SiSpringboot className="w-full h-full text-green-500" /> },
       { name: "Apache Kafka", icon: <SiApachekafka className="w-full h-full text-black dark:text-white" /> },
-      { name: "Java", icon: <SiSpringboot className="w-full h-full text-red-500" /> }
+      { name: "Java", icon: <FaJava className="w-full h-full text-red-500" /> }
     ],
     clients: [
       {
@@ -90,12 +91,12 @@ const workExperience = [
   {
     company: "Wipro",
     logo: <SiWipro className="h-8 w-8 text-blue-500" />,
-    role: "Software Engineer",
+    role: "Project Engineer",
     period: "June,2019 - March,2022",
     location: "Hyderabad, India",
     description: "Full-stack development across multiple international client projects.",
     technologies: [
-      { name: "Java", icon: <SiSpringboot className="w-full h-full text-red-500" /> },
+      { name: "Java", icon: <FaJava className="w-full h-full text-red-500" /> },
       { name: "Spring Boot", icon: <SiSpringboot className="w-full h-full text-green-500" /> },
       { name: "JavaScript", icon: <SiJavascript className="w-full h-full text-yellow-400" /> },
       { name: "Angular", icon: <SiAngular className="w-full h-full text-red-500" /> },

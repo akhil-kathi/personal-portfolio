@@ -1,23 +1,35 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
+import {
   Sun,
   Moon,
-  Menu} from 'lucide-react';
+  Menu
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { WorkExperience } from '@/components/sections/WorkExperience';
-import { Education } from '@/components/sections/Education';
-import { Certifications } from '@/components/sections/Certifications';
-import { Interests } from './components/sections/Interests';
-import { Hero } from './components/sections/Hero';
-import { Preloader } from './components/sections/Preloader';
+
+// Lazy load components
+const WorkExperience = lazy(() => import('@/components/sections/WorkExperience').then(module => ({ default: module.WorkExperience })));
+const Education = lazy(() => import('@/components/sections/Education').then(module => ({ default: module.Education })));
+const Certifications = lazy(() => import('@/components/sections/Certifications').then(module => ({ default: module.Certifications })));
+const Interests = lazy(() => import('./components/sections/Interests').then(module => ({ default: module.Interests })));
+const Hero = lazy(() => import('./components/sections/Hero').then(module => ({ default: module.Hero })));
+const Preloader = lazy(() => import('./components/sections/Preloader').then(module => ({ default: module.Preloader })));
+const Blogs = lazy(() => import('./components/sections/Blogs').then(module => ({ default: module.Blogs })));
+
+// Loading fallback component
+const LoadingFallback = () => (
+  <div className="flex items-center justify-center min-h-[200px]">
+    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+  </div>
+);
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [isDark, setIsDark] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const currentYear = new Date().getFullYear();
 
   useEffect(() => {
     document.documentElement.classList.add('dark');
@@ -41,6 +53,7 @@ function App() {
       <Button variant="ghost" onClick={() => scrollToSection('experience')}>Experience</Button>
       <Button variant="ghost" onClick={() => scrollToSection('education')}>Education</Button>
       <Button variant="ghost" onClick={() => scrollToSection('certifications')}>Certifications</Button>
+      <Button variant="ghost" onClick={() => scrollToSection('blogs')}>Blogs</Button>
       <Button variant="ghost" onClick={() => scrollToSection('interests')}>Interests</Button>
     </>
   );
@@ -48,8 +61,9 @@ function App() {
   return (
     <AnimatePresence>
       {loading ? (
-        <Preloader/>
-
+        <Suspense fallback={<LoadingFallback />}>
+          <Preloader />
+        </Suspense>
       ) : (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -69,7 +83,7 @@ function App() {
                 >
                   AK
                 </motion.button>
-                
+
                 <div className="hidden md:flex items-center gap-4">
                   <NavLinks />
                   <Button variant="ghost" size="icon" onClick={toggleTheme}>
@@ -99,29 +113,46 @@ function App() {
           </nav>
 
           {/* Hero Section */}
+
           <Hero scrollToSection={scrollToSection} />
 
+
           {/* Work Experience */}
-          <WorkExperience />
+          <Suspense fallback={<LoadingFallback />}>
+            <WorkExperience />
+          </Suspense>
 
           <Separator />
 
           {/* Education */}
-          <Education />
+          <Suspense fallback={<LoadingFallback />}>
+            <Education />
+          </Suspense>
 
           <Separator />
 
           {/* Certifications */}
-          <Certifications />
+          <Suspense fallback={<LoadingFallback />}>
+            <Certifications />
+          </Suspense>
+
+          <Separator />
+
+          {/* Blogs */}
+          <Suspense fallback={<LoadingFallback />}>
+            <Blogs />
+          </Suspense>
 
           <Separator />
 
           {/* Interests */}
-          <Interests />
+          <Suspense fallback={<LoadingFallback />}>
+            <Interests />
+          </Suspense>
 
           {/* Footer */}
           <footer className="py-6 sm:py-8 px-4 text-center text-muted-foreground">
-            <p className="text-sm sm:text-base">© 2024 Akhil Kathi. All rights reserved.</p>
+            <p className="text-sm sm:text-base">© {currentYear} Akhil Kathi. All rights reserved.</p>
           </footer>
         </motion.div>
       )}
