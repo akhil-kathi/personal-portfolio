@@ -59,7 +59,8 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'framer-motion']
+    include: ['react', 'react-dom', 'framer-motion'],
+    exclude: ['@radix-ui/react-icons', '@radix-ui/react-slot']
   },
   // Copy SEO files to dist directory
   publicDir: 'public',
