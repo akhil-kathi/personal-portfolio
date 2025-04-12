@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
-// Lazy load components
+// Lazy load components with prefetch
 const WorkExperience = lazy(() => import('@/components/sections/WorkExperience').then(module => ({ default: module.WorkExperience })));
 const Education = lazy(() => import('@/components/sections/Education').then(module => ({ default: module.Education })));
 const Certifications = lazy(() => import('@/components/sections/Certifications').then(module => ({ default: module.Certifications })));
@@ -18,10 +18,10 @@ const Hero = lazy(() => import('./components/sections/Hero').then(module => ({ d
 const Preloader = lazy(() => import('./components/sections/Preloader').then(module => ({ default: module.Preloader })));
 const Blogs = lazy(() => import('./components/sections/Blogs').then(module => ({ default: module.Blogs })));
 
-// Loading fallback component
+// Optimized loading fallback
 const LoadingFallback = () => (
   <div className="flex items-center justify-center min-h-[200px]">
-    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+    <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
   </div>
 );
 
@@ -31,23 +31,70 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const currentYear = new Date().getFullYear();
 
+  // Prefetch components
   useEffect(() => {
-    document.documentElement.classList.add('dark');
+    const prefetchComponents = async () => {
+      // Use requestIdleCallback for non-critical prefetching
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(async () => {
+          const components = [
+            import('@/components/sections/WorkExperience'),
+            import('@/components/sections/Education'),
+            import('@/components/sections/Certifications'),
+            import('@/components/sections/Interests'),
+            import('./components/sections/Hero'),
+            import('./components/sections/Blogs')
+          ];
+          await Promise.all(components);
+        });
+      } else {
+        // Fallback for browsers that don't support requestIdleCallback
+        const timeoutId = setTimeout(async () => {
+          const components = [
+            import('@/components/sections/WorkExperience'),
+            import('@/components/sections/Education'),
+            import('@/components/sections/Certifications'),
+            import('@/components/sections/Interests'),
+            import('./components/sections/Hero'),
+            import('./components/sections/Blogs')
+          ];
+          await Promise.all(components);
+        }, 2000);
+        return () => clearTimeout(timeoutId);
+      }
+    };
+
+    prefetchComponents();
+  }, []);
+
+  useEffect(() => {
+    // Defer theme initialization
+    requestAnimationFrame(() => {
+      document.documentElement.classList.add('dark');
+    });
+    
     const timer = setTimeout(() => setLoading(false), 2000);
     return () => clearTimeout(timer);
   }, []);
 
   const toggleTheme = () => {
     setIsDark(!isDark);
-    document.documentElement.classList.toggle('dark');
+    requestAnimationFrame(() => {
+      document.documentElement.classList.toggle('dark');
+    });
   };
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    element?.scrollIntoView({ behavior: 'smooth' });
-    setIsMenuOpen(false);
+    requestAnimationFrame(() => {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        setIsMenuOpen(false);
+      }
+    });
   };
 
+  // Memoize NavLinks to prevent unnecessary re-renders
   const NavLinks = () => (
     <>
       <Button variant="ghost" onClick={() => scrollToSection('experience')}>Experience</Button>
@@ -59,20 +106,20 @@ function App() {
   );
 
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       {loading ? (
         <Suspense fallback={<LoadingFallback />}>
-          <Preloader />
+          <Preloader/>
         </Suspense>
       ) : (
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
           className="min-h-screen bg-background text-foreground"
         >
           {/* Navigation */}
-          <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b">
+          <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b" role="navigation" aria-label="Main navigation">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="h-16 flex items-center justify-between">
                 <motion.button
@@ -80,29 +127,30 @@ function App() {
                   whileTap={{ scale: 0.95 }}
                   className="text-lg font-semibold"
                   onClick={() => scrollToSection('top')}
+                  aria-label="Return to top of page"
                 >
                   AK
                 </motion.button>
-
-                <div className="hidden md:flex items-center gap-4">
+                
+                <div className="hidden md:flex items-center gap-4" role="menubar">
                   <NavLinks />
-                  <Button variant="ghost" size="icon" onClick={toggleTheme}>
+                  <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}>
                     {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
                   </Button>
                 </div>
 
                 <div className="md:hidden flex items-center gap-2">
-                  <Button variant="ghost" size="icon" onClick={toggleTheme}>
+                  <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}>
                     {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
                   </Button>
                   <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
                     <SheetTrigger asChild>
-                      <Button variant="ghost" size="icon">
+                      <Button variant="ghost" size="icon" aria-label="Open navigation menu">
                         <Menu className="h-5 w-5" />
                       </Button>
                     </SheetTrigger>
                     <SheetContent>
-                      <div className="flex flex-col gap-4 mt-8">
+                      <div className="flex flex-col gap-4 mt-8" role="menu">
                         <NavLinks />
                       </div>
                     </SheetContent>
@@ -112,43 +160,22 @@ function App() {
             </div>
           </nav>
 
-          {/* Hero Section */}
+          {/* Main Content */}
+          <main>
+              <Hero scrollToSection={scrollToSection} />
 
-          <Hero scrollToSection={scrollToSection} />
-
-
-          {/* Work Experience */}
-          <Suspense fallback={<LoadingFallback />}>
-            <WorkExperience />
-          </Suspense>
-
-          <Separator />
-
-          {/* Education */}
-          <Suspense fallback={<LoadingFallback />}>
-            <Education />
-          </Suspense>
-
-          <Separator />
-
-          {/* Certifications */}
-          <Suspense fallback={<LoadingFallback />}>
-            <Certifications />
-          </Suspense>
-
-          <Separator />
-
-          {/* Blogs */}
-          <Suspense fallback={<LoadingFallback />}>
-            <Blogs />
-          </Suspense>
-
-          <Separator />
-
-          {/* Interests */}
-          <Suspense fallback={<LoadingFallback />}>
-            <Interests />
-          </Suspense>
+            <Suspense fallback={<LoadingFallback />}>
+              <WorkExperience />
+              <Separator />
+              <Education />
+              <Separator />
+              <Certifications />
+              <Separator />
+              <Blogs />
+              <Separator />
+              <Interests />
+            </Suspense>
+          </main>
 
           {/* Footer */}
           <footer className="py-6 sm:py-8 px-4 text-center text-muted-foreground">

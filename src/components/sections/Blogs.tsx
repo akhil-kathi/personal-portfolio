@@ -18,19 +18,41 @@ export function Blogs() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    let mounted = true;
+
     async function fetchPosts() {
       try {
         const mediumPosts = await getMediumPosts();
-        setPosts(mediumPosts);
+        if (mounted) {
+          setPosts(mediumPosts);
+        }
       } catch (err) {
-        setError('Failed to load blog posts');
-        console.error('Error loading blog posts:', err);
+        if (mounted) {
+          setError('Failed to load blog posts');
+          console.error('Error loading blog posts:', err);
+        }
       } finally {
-        setLoading(false);
+        if (mounted) {
+          setLoading(false);
+        }
       }
     }
 
-    fetchPosts();
+    // Use requestIdleCallback for non-critical data fetching
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(fetchPosts);
+    } else {
+      // Fallback for browsers that don't support requestIdleCallback
+      const timeoutId = setTimeout(fetchPosts, 0);
+      return () => {
+        mounted = false;
+        clearTimeout(timeoutId);
+      };
+    }
+
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   return (
@@ -83,6 +105,18 @@ export function Blogs() {
                       )}
                     </div>
                   </a>
+                  <div className="mt-4">
+                    <a
+                      href={post.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+                      aria-label={`Read blog post: ${post.title} (opens in new tab)`}
+                    >
+                      <span>Read more</span>
+                      <SiMedium className="h-5 w-5" />
+                    </a>
+                  </div>
                 </Card>
               ))}
             </div>
@@ -92,6 +126,7 @@ export function Blogs() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+                aria-label="View all blog posts on Medium (opens in new tab)"
               >
                 <span>Read more on Medium</span>
                 <SiMedium className="h-5 w-5" />

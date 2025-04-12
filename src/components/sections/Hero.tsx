@@ -36,25 +36,25 @@ export function Hero({ scrollToSection }: HeroProps) {
           className="flex flex-wrap justify-center gap-4"
         >
           <Button variant="outline" size="lg" asChild>
-            <a href="https://github.com/akhil-kathi" target="_blank" rel="noopener noreferrer" className="flex items-center">
-              <SiGithub className="mr-2 h-5 w-5 text-[#181717] dark:text-white" />
+            <a href="https://github.com/akhil-kathi" target="_blank" rel="noopener noreferrer" className="flex items-center" aria-label="Visit Akhil's GitHub profile (opens in new tab)">
+              <SiGithub className="mr-2 h-5 w-5 text-[#181717] dark:text-white"  />
               <span className="hidden sm:inline">GitHub</span>
             </a>
           </Button>
           <Button variant="outline" size="lg" asChild>
-            <a href="https://linkedin.com/in/akhilkathi" target="_blank" rel="noopener noreferrer" className="flex items-center">
-              <SiLinkedin className="mr-2 h-5 w-5 text-[#0A66C2]" />
+            <a href="https://linkedin.com/in/akhilkathi" target="_blank" rel="noopener noreferrer" className="flex items-center" aria-label="Visit Akhil's LinkedIn profile (opens in new tab)">
+              <SiLinkedin className="mr-2 h-5 w-5 text-[#0A66C2]"  />
               <span className="hidden sm:inline">LinkedIn</span>
             </a>
           </Button>
           <Button variant="outline" size="lg" asChild>
-            <a href="https://medium.com/@akhilkathi" target="_blank" rel="noopener noreferrer" className="flex items-center">
+            <a href="https://medium.com/@akhilkathi" target="_blank" rel="noopener noreferrer" className="flex items-center" aria-label="Visit Akhil's Medium blog (opens in new tab)">
               <FaMedium className="mr-2 h-5 w-5 text-[#000000] dark:text-white" />
               <span className="hidden sm:inline">Blog</span>
             </a>
           </Button>
           <Button variant="outline" size="lg" asChild>
-            <a href="mailto:akhilkathi@duck.com" className="flex items-center">
+            <a href="mailto:akhilkathi@duck.com" className="flex items-center" aria-label="Send email to Akhil">
               <MdEmail className="mr-2 h-5 w-5 text-[#EA4335]" />
               <span className="hidden sm:inline">Contact</span>
             </a>
@@ -66,6 +66,7 @@ export function Hero({ scrollToSection }: HeroProps) {
         transition={{ duration: 2, repeat: Infinity }}
         className="absolute bottom-8 cursor-pointer"
         onClick={() => scrollToSection('experience')}
+        style={{ willChange: 'transform' }}
       >
         <HiChevronDown className="h-8 w-8" />
       </motion.div>

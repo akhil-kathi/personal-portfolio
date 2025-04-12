@@ -57,7 +57,10 @@ export function CertificateViewer({ isOpen, onClose, certificate }: CertificateV
               MozUserSelect: 'none',
               msUserSelect: 'none',
               userSelect: 'none',
+              willChange: 'transform',
             }}
+            role="img"
+            aria-label={`Certificate image for ${certificate.title}`}
           >
             <img
               src={certificate.imageUrl}
@@ -65,7 +68,10 @@ export function CertificateViewer({ isOpen, onClose, certificate }: CertificateV
               className="w-full rounded-lg"
               style={{
                 WebkitTouchCallout: 'none',
+                contentVisibility: 'auto',
               }}
+              loading="lazy"
+              decoding="async"
               onDragStart={(e) => e.preventDefault()}
             />
           </div>
@@ -74,6 +80,7 @@ export function CertificateViewer({ isOpen, onClose, certificate }: CertificateV
             target="_blank"
             rel="noopener noreferrer"
             className="mt-4 inline-block text-sm text-primary hover:underline"
+            aria-label={`Verify authenticity of ${certificate.title} (opens in new tab)`}
           >
             Verify Certificate Authenticity
           </a>

@@ -12,11 +12,11 @@ const education = [
     institution: "Wesley PG College",
     university: "Osmania University",
     universityUrl: "https://www.osmania.ac.in/",
-    logo: <img src={wesleyLogo} alt="Wesley" className="w-12 h-12 object-cover rounded-full" />,
+    logo: <img src={wesleyLogo} alt="Wesley" className="w-12 h-12 object-cover rounded-full" loading="lazy" decoding="async" />,
     period: "Sept,2021 - Oct,2023",
     location: "Hyderabad, India",
     url: "https://www.linkedin.com/school/wesley-pg-college---india/",
-    grade: "First Class"
+    grade: "8.9 CGPA"
   },
   {
     degree: "Bachelors in Technology",
@@ -24,23 +24,23 @@ const education = [
     institution: "Keshav Memorial Institute of Technology",
     university: "Jawaharlal Nehru Technological University, Hyderabad",
     universityUrl: "https://jntuh.ac.in/",
-    logo: <img src={kmitLogo} alt="KMIT" className="w-12 h-12 object-cover rounded-full" />,
+    logo: <img src={kmitLogo} alt="KMIT" className="w-12 h-12 object-cover rounded-full" loading="lazy" decoding="async" />,
     period: "July,2015 - July,2019",
     location: "Hyderabad, India",
     url: "https://kmit.in/",
-    grade: "First Class with Distinction"
+    grade: "7.8 CGPA"
   },
   {
     degree: "Intermediate (10+2)",
     course: "Mathematics, Physics, Chemistry",
     institution: "Officers Academy",
     university: "Board of Intermediate Education, Telangana",
-    universityUrl: "https://tgbie.cgg.gov.in/",
-    logo: <img src={officersAcademyLogo} alt="Officers Academy" className="w-12 h-12 object-cover rounded-full" />,
+    universityUrl: "https://bie.telangana.gov.in/",
+    logo: <img src={officersAcademyLogo} alt="Officers Academy" className="w-12 h-12 object-cover rounded-full" loading="lazy" decoding="async" />,
     period: "March,2013 - March,2015",
     location: "Hyderabad, India",
     url: "https://g.co/kgs/LPgmhak",
-    grade: "86%"
+    grade: "94.7%"
   },
   {
     degree: "Secondary School",
@@ -48,11 +48,11 @@ const education = [
     institution: "Johnson Grammar School",
     university: "Indian Certificate of Secondary Education",
     universityUrl: "https://www.cisce.org/",
-    logo: <img src={jgsLogo} alt="JGS" className="w-12 h-12 object-cover rounded-full" />,
+    logo: <img src={jgsLogo} alt="JGS" className="w-12 h-12 object-cover rounded-full" loading="lazy" decoding="async" />,
     period: "Feb,2001 - March,2013",
     location: "Hyderabad, India",
     url: "https://jgsicse.org/",
-    grade: "82%"
+    grade: "92.8%"
   }
 ];
 
