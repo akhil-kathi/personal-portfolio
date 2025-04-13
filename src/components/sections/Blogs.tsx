@@ -62,7 +62,7 @@ export function Blogs() {
           <Newspaper className="h-6 sm:h-8 w-6 sm:w-8" />
           <h2 className="text-2xl sm:text-3xl font-bold">Latest Blogs</h2>
         </div>
-        
+
         {loading ? (
           <div className="text-center text-muted-foreground">Loading posts...</div>
         ) : error ? (
@@ -72,9 +72,9 @@ export function Blogs() {
             <div className="grid grid-cols-1 gap-6 sm:gap-8">
               {posts.slice(0, 2).map((post, index) => (
                 <Card key={index} className="p-4 sm:p-6 overflow-hidden hover:shadow-lg transition-shadow">
-                  <a 
-                    href={post.link} 
-                    target="_blank" 
+                  <a
+                    href={post.link}
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="block"
                   >
@@ -83,18 +83,18 @@ export function Blogs() {
                         <h3 className="text-lg sm:text-xl font-semibold hover:text-primary transition-colors">
                           {post.title}
                         </h3>
-                        <SiMedium className="h-6 w-6 flex-shrink-0" />
+                        <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+                          <span>{post.date}</span>
+                        </div>
                       </div>
-                      <p className="text-muted-foreground text-sm sm:text-base line-clamp-2">
+                      <p className="text-muted-foreground text-sm sm:text-base line-clamp-3 break-words">
                         {post.description}
                       </p>
-                      <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-                        <span>{post.date}</span>
-                      </div>
+                      
                       {post.categories.length > 0 && (
                         <div className="flex flex-wrap gap-2">
                           {post.categories.map((tag, tagIndex) => (
-                            <span 
+                            <span
                               key={tagIndex}
                               className="px-2 py-1 text-xs rounded-full bg-muted text-muted-foreground"
                             >
@@ -105,18 +105,7 @@ export function Blogs() {
                       )}
                     </div>
                   </a>
-                  <div className="mt-4">
-                    <a
-                      href={post.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
-                      aria-label={`Read blog post: ${post.title} (opens in new tab)`}
-                    >
-                      <span>Read more</span>
-                      <SiMedium className="h-5 w-5" />
-                    </a>
-                  </div>
+
                 </Card>
               ))}
             </div>

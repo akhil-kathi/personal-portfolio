@@ -16,7 +16,7 @@ const education = [
     period: "Sept,2021 - Oct,2023",
     location: "Hyderabad, India",
     url: "https://www.linkedin.com/school/wesley-pg-college---india/",
-    grade: "8.9 CGPA"
+    grade: "Ⅰ Class (67%)"
   },
   {
     degree: "Bachelors in Technology",
@@ -28,7 +28,7 @@ const education = [
     period: "July,2015 - July,2019",
     location: "Hyderabad, India",
     url: "https://kmit.in/",
-    grade: "7.8 CGPA"
+    grade: "Ⅰ  Class with Distinction (70%)"
   },
   {
     degree: "Intermediate (10+2)",
@@ -40,7 +40,7 @@ const education = [
     period: "March,2013 - March,2015",
     location: "Hyderabad, India",
     url: "https://g.co/kgs/LPgmhak",
-    grade: "94.7%"
+    grade: "86%"
   },
   {
     degree: "Secondary School",
@@ -52,7 +52,7 @@ const education = [
     period: "Feb,2001 - March,2013",
     location: "Hyderabad, India",
     url: "https://jgsicse.org/",
-    grade: "92.8%"
+    grade: "82%%"
   }
 ];
 

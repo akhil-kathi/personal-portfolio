@@ -15,7 +15,7 @@ export function Preloader() {
         id="ak-loader-svg"
         xmlns="http://www.w3.org/2000/svg"
         width="150"
-        height="100%"
+        height="147"
         viewBox="0 0 1024 1007"
         preserveAspectRatio="xMidYMid slice"
         className="overflow-visible"

@@ -11,8 +11,8 @@ interface HeroProps {
 
 export function Hero({ scrollToSection }: HeroProps) {
   return (
-    <section id="top" className="relative min-h-screen flex items-center justify-center text-center px-4 sm:px-6 lg:px-8 pt-16">
-      <div className="max-w-3xl mx-auto">
+    <section id="top" className="relative min-h-screen flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8">
+      <div className="flex-1 flex flex-col items-center justify-center max-w-3xl mx-auto">
         <motion.h1 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

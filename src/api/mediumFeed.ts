@@ -43,7 +43,13 @@ export async function getMediumPosts(): Promise<MediumPost[]> {
     if (data.status === 'ok') {
       const posts = data.items.map((item: any) => ({
         title: item.title,
-        description: item.description.replace(/<[^>]*>/g, '').slice(0, 150) + '...',
+        description: item.description
+          .replace(/<[^>]*>/g, '') // Remove HTML tags
+          .replace(/\s+/g, ' ') // Replace multiple spaces with single space
+          .trim()
+          .split(/[.!?]+/) // Split into sentences
+          .slice(0, 2) // Take first two sentences
+          .join('. ') + '.', // Join with period and add final period
         date: new Date(item.pubDate).toLocaleDateString('en-US', {
           year: 'numeric',
           month: 'short',
