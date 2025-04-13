@@ -52,7 +52,7 @@ const education = [
     period: "Feb,2001 - March,2013",
     location: "Hyderabad, India",
     url: "https://jgsicse.org/",
-    grade: "82%%"
+    grade: "82%"
   }
 ];
 
