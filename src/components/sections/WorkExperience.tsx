@@ -42,7 +42,7 @@ const workExperience = [
     period: "March,2022 - Present",
     location: "Hyderabad, India",
     description: (<>
-      Operating within the Communication Platform as a Service (CPaaS) domain, specializing in delivering robust, scalable solutions through Webex Connect—a multi-channel communication platform that supports WhatsApp, Email, SMS, RCS, and Apple Business Messaging.      <br />
+      Operating within the Customer Experience (CX) i.e. combination of Communication Platform as a Service (CPaaS) and Contact Center (CC) domain, specializing in delivering robust, scalable solutions through Webex Connect—a multi-channel communication platform that supports WhatsApp, Email, SMS, RCS, and Apple Business Messaging.      <br />
       <br />
       Working in an Agile environment, collaborating with cross-functional teams to implement features based on evolving project priorities and client requirements. Responsibilities encompass engaging in client meetings for requirement gathering, clarifications, and feedback sessions to ensure all deliverables align with strategic business goals and client expectations.
     </>),
@@ -76,7 +76,7 @@ const workExperience = [
       {
         name: "Rogers",
         logo: <img src={rogersLogo} alt="Rogers" loading="lazy" className="w-6 h-6 object-cover rounded-full" />,
-        work: "Built an backend solution for customer to redeem their offers and ad-ons.",
+        work: "Built an backend solution for customer to redeem offers, ad-ons, vouchers and coupons.",
         url: "https://www.rogers.com"
       },
       {
@@ -150,7 +150,7 @@ export function WorkExperience() {
   return (
     <section id="experience" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 scroll-mt-16">
       <div className="max-w-4xl mx-auto">
-        <div className="flex items-center gap-4 mb-8 sm:mb-12">
+        <div className="flex items-center justify-center gap-4 mb-8 sm:mb-12">
           <Briefcase className="h-6 sm:h-8 w-6 sm:w-8" />
           <h2 className="text-2xl sm:text-3xl font-bold">Work Experience</h2>
         </div>
@@ -158,20 +158,20 @@ export function WorkExperience() {
           {workExperience.map((job, index) => (
             <Card key={index} className="p-4 sm:p-6 overflow-hidden">
               <div className="space-y-4">
-                {/* Header with company name and logo */}
-                <div className="flex items-center gap-3">
-                  {job.logo}
-                  <h3 className="text-xl font-semibold">{job.company}</h3>
+                {/* Header with company name, logo and period */}
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-3">
+                    {job.logo}
+                    <h3 className="text-xl font-semibold">{job.company}</h3>
+                  </div>
+                  <span className="text-sm text-muted-foreground whitespace-nowrap">{job.period}</span>
                 </div>
 
-                {/* Sub-header with role, location, and period */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-muted-foreground">
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                    <span className="font-medium">{job.role}</span>
-                    <span className="hidden sm:inline">•</span>
-                    <span>{job.location}</span>
-                  </div>
-                  <span>{job.period}</span>
+                {/* Sub-header with role and location */}
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <span className="font-medium">{job.role}</span>
+                  <span>•</span>
+                  <span>{job.location}</span>
                 </div>
 
                 <Separator className="my-4" />

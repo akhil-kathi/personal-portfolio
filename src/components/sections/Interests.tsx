@@ -8,9 +8,9 @@ export function Interests() {
   return (
     <section id="interests" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 scroll-mt-16">
       <div className="max-w-4xl mx-auto">
-        <div className="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8 md:mb-12">
-          <FaHeart className="h-5 w-5 sm:h-6 sm:w-6 md:h-8 md:w-8" />
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">Interests</h2>
+        <div className="flex items-center justify-center gap-4 mb-8 sm:mb-12">
+          <FaHeart className="h-6 sm:h-8 w-6 sm:w-8" />
+          <h2 className="text-2xl sm:text-3xl font-bold">Interests</h2>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           <Card className="p-4 sm:p-5 md:p-6 hover:shadow-lg transition-shadow duration-300">

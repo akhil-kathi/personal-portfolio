@@ -8,15 +8,17 @@ import {
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Hero } from '@/components/sections/Hero';
+import { WorkExperience } from '@/components/sections/WorkExperience';
+import { Education } from '@/components/sections/Education';
+import { Certifications } from '@/components/sections/Certifications';
+import { Blogs } from '@/components/sections/Blogs';
+import { Interests } from '@/components/sections/Interests';
+import { About } from '@/components/sections/About';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 // Lazy load components with prefetch
-const WorkExperience = lazy(() => import('@/components/sections/WorkExperience').then(module => ({ default: module.WorkExperience })));
-const Education = lazy(() => import('@/components/sections/Education').then(module => ({ default: module.Education })));
-const Certifications = lazy(() => import('@/components/sections/Certifications').then(module => ({ default: module.Certifications })));
-const Interests = lazy(() => import('./components/sections/Interests').then(module => ({ default: module.Interests })));
-const Hero = lazy(() => import('./components/sections/Hero').then(module => ({ default: module.Hero })));
 const Preloader = lazy(() => import('./components/sections/Preloader').then(module => ({ default: module.Preloader })));
-const Blogs = lazy(() => import('./components/sections/Blogs').then(module => ({ default: module.Blogs })));
 
 // Optimized loading fallback
 const LoadingFallback = () => (
@@ -26,10 +28,13 @@ const LoadingFallback = () => (
 );
 
 function App() {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [isDark, setIsDark] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const currentYear = new Date().getFullYear();
+  const [activeSection, setActiveSection] = useState('top');
 
   // Prefetch components
   useEffect(() => {
@@ -72,9 +77,47 @@ function App() {
     requestAnimationFrame(() => {
       document.documentElement.classList.add('dark');
     });
-    
+
     const timer = setTimeout(() => setLoading(false), 2000);
     return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    // Handle path-based navigation
+    const path = location.pathname.slice(1); // Remove leading slash
+    if (path && path !== 'top') {
+      const element = document.getElementById(path);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        setActiveSection(path);
+      } else {
+        // If path doesn't match any section, redirect to top
+        navigate('/', { replace: true });
+      }
+    }
+  }, [location.pathname, navigate]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['top', 'about', 'experience', 'education', 'certifications', 'blogs', 'interests'];
+      const scrollPosition = window.scrollY + 100;
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section);
+            // Update URL without triggering navigation
+            window.history.replaceState(null, '', `/${section === 'top' ? '' : section}`);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const toggleTheme = () => {
@@ -85,18 +128,18 @@ function App() {
   };
 
   const scrollToSection = (id: string) => {
-    requestAnimationFrame(() => {
-      const element = document.getElementById(id);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-        setIsMenuOpen(false);
-      }
-    });
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      // Update URL without triggering navigation
+      window.history.replaceState(null, '', `/${id === 'top' ? '' : id}`);
+    }
   };
 
   // Memoize NavLinks to prevent unnecessary re-renders
   const NavLinks = () => (
     <>
+      <Button variant="ghost" onClick={() => scrollToSection('about')}>About</Button>
       <Button variant="ghost" onClick={() => scrollToSection('experience')}>Experience</Button>
       <Button variant="ghost" onClick={() => scrollToSection('education')}>Education</Button>
       <Button variant="ghost" onClick={() => scrollToSection('certifications')}>Certifications</Button>
@@ -108,9 +151,7 @@ function App() {
   return (
     <AnimatePresence mode="wait">
       {loading ? (
-        <Suspense fallback={<LoadingFallback />}>
-          <Preloader/>
-        </Suspense>
+        <Preloader />
       ) : (
         <motion.div
           initial={{ opacity: 0 }}
@@ -131,7 +172,7 @@ function App() {
                 >
                   AK
                 </motion.button>
-                
+
                 <div className="hidden md:flex items-center gap-4" role="menubar">
                   <NavLinks />
                   <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}>
@@ -162,19 +203,18 @@ function App() {
 
           {/* Main Content */}
           <main>
-              <Hero scrollToSection={scrollToSection} />
-
-            <Suspense fallback={<LoadingFallback />}>
-              <WorkExperience />
-              <Separator />
-              <Education />
-              <Separator />
-              <Certifications />
-              <Separator />
-              <Blogs />
-              <Separator />
-              <Interests />
-            </Suspense>
+            <Hero scrollToSection={scrollToSection} />
+            <About />
+            <Separator />
+            <WorkExperience />
+            <Separator />
+            <Education />
+            <Separator />
+            <Certifications />
+            <Separator />
+            <Blogs />
+            <Separator />
+            <Interests />
           </main>
 
           {/* Footer */}

@@ -58,9 +58,9 @@ export function Blogs() {
   return (
     <section id="blogs" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 scroll-mt-16">
       <div className="max-w-4xl mx-auto">
-        <div className="flex items-center gap-4 mb-8 sm:mb-12">
+        <div className="flex items-center justify-center gap-4 mb-8 sm:mb-12">
           <Newspaper className="h-6 sm:h-8 w-6 sm:w-8" />
-          <h2 className="text-2xl sm:text-3xl font-bold">Latest Blogs</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold">Blogs</h2>
         </div>
 
         {loading ? (
@@ -79,11 +79,11 @@ export function Blogs() {
                     className="block"
                   >
                     <div className="flex flex-col gap-4">
-                      <div className="flex justify-between items-start">
+                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
                         <h3 className="text-lg sm:text-xl font-semibold hover:text-primary transition-colors">
                           {post.title}
                         </h3>
-                        <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
                           <span>{post.date}</span>
                         </div>
                       </div>
