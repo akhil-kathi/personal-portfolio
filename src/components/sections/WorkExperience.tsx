@@ -12,7 +12,6 @@ import {
   SiSpringboot,
   SiApachekafka,
   SiAngular,
-  SiReact,
   SiMysql,
   SiCisco,
   SiWipro,
@@ -32,6 +31,7 @@ import rogersLogo from '@/assets/images/companies/Rogers.webp';
 import centricaLogo from '@/assets/images/companies/Centrica.webp';
 import racLogo from '@/assets/images/companies/RAC.webp';
 import capitalOne from '@/assets/images/companies/CapitalOne.webp';
+import skatLogo from '@/assets/images/companies/Skat.webp';
 
 // Work Experience Data
 const workExperience = [
@@ -87,9 +87,9 @@ const workExperience = [
       },
       {
         name: "SKAT",
-        logo: <SiVolkswagen className="w-6 h-6 text-blue-500" />,
+        logo: <img src={skatLogo} alt="CapitalOne" loading="lazy" className="w-6 h-6 object-cover rounded-full" />,
         work: "Built a survey solution with intensive reporting.",
-        url: "https://www.newday.co.uk"
+        url: "https://skat.dk/borger"
       }
     ]
   },
@@ -140,7 +140,7 @@ const workExperience = [
         name: "Honda",
         logo: <SiHonda className="w-6 h-6 text-red-600" />,
         work: "Developed new screens for portal used for supply chain management of raw goods across the globe.",
-        url: "https://www.honda.co.uk"
+        url: "https://global.honda/en/"
       }
     ]
   }
